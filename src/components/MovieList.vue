@@ -8,7 +8,12 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item" v-for="movie in filteredMovies" :key="movie.id">
                         <h3>{{movie.title}}</h3>
-                        <span class="badge badge-light" v-if="movie.subtitle">{{movie.subtitle}}</span>
+                        <h4 v-if="movie.subtitle">{{movie.subtitle}}</h4>
+                        <p v-if="movie.director.length">
+                            <span v-for="(artist, index) in movie.director" :key="artist.id">
+                                {{index === (movie.director.length -1 ) ? artist.showName : artist.showName + ","}}
+                            </span>
+                        </p>
                     </li>
                 </ul>
             </div>
@@ -52,7 +57,7 @@ export default {
     const response = await fetch(graphcms.api, {
       method: "post",
       body: JSON.stringify({
-        query: `query { movies { id, title, subtitle } }`
+        query: `query { movies { id, title, subtitle, director { id, showName } } }`
       })
     });
 
