@@ -1,11 +1,18 @@
 <template>
-    <div class="random-div">
-        <input type="text" v-model="search" />
-        <ul>
-            <li v-for="movie in filteredMovies" :key="movie.id">
-                {{movie.title}} || {{movie.subtitle}}
-            </li>
-        </ul>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <div class="input-group">
+                    <input class="form-control" type="text" v-model="search" />
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" v-for="movie in filteredMovies" :key="movie.id">
+                        <h3>{{movie.title}}</h3>
+                        <span class="badge badge-light" v-if="movie.subtitle">{{movie.subtitle}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </template>
 
